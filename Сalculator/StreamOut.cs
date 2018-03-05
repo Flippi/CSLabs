@@ -2,7 +2,7 @@
 
 namespace Сalculator
 {
-    class StreamOut
+    public class StreamOut
     {
         public void HelpMassage()
         {

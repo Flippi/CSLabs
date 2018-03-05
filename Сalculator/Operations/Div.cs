@@ -6,7 +6,7 @@
         public bool Run(params object[] args)
         {
             var mathBuffer = (Buff)args[0];
-            var outStream = (StreamOut)args[1];
+            var outStream = (StreamOut)args[2];
 
             double b = mathBuffer.ReadValue();
 
