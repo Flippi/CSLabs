@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace Сalculator
 {
-    public class ReadInst
+    public class InOutStream
     {
         public virtual IOperation ReadOperation(List<IOperation> list)
         {
@@ -43,25 +43,44 @@ namespace Сalculator
             }
         }
 
-        public int ReadInt(int  a)
+        public int ReadInt(int a)
         {
-            Console.WriteLine("@: #");
+            
 
             int operand = 0;
-            while ( operand < 1 || operand >= a)
+            while (operand < 1 || operand >= a)
             {
                 try
                 {
+                    Console.WriteLine("@: #");
                     ConsoleDeleteLine.CleanPreviousLine(4);
                     operand = int.Parse(Console.ReadLine(), NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
-                    
+
                 }
-                catch (Exception ex)
+                catch
                 {
-                    Console.WriteLine(ex.Message);
+                    ConsoleDeleteLine.CleanPreviousLine(4);
                 }
             }
+
             return operand;
         }
+
+        public void HelpMessage()
+        {
+            Console.WriteLine("Usage: \n    " +
+               "when first symbol on line is ‘>’ –enter operand (number) \n    " +
+               "when first symbol on line is ‘@’ –enter operation \n    " +
+               "operation is one of ‘+’, ‘-‘, ‘/’, ‘*’or \n    " +
+               "‘#’ followed with number of evaluation step \n    " +
+               "‘q’ to exit");
+        }
+
+        public void OutElement(int ElementNumber, double Element)
+        {
+            Console.WriteLine(" [" + ElementNumber + "] = " + Element);
+        }
+
+        public virtual void SendException() => Console.WriteLine(new DivideByZeroException().Message);
     }
 }

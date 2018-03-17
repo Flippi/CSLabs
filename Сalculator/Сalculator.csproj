@@ -42,21 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buff.cs" />
+    <Compile Include="ValuesBuffer.cs" />
     <Compile Include="ConsoleDelateLine.cs" />
-    <Compile Include="Operations\Add.cs" />
-    <Compile Include="Operations\SaveValue.cs" />
-    <Compile Include="ReadInst.cs" />
-    <Compile Include="Operations\Div.cs" />
-    <Compile Include="Operations\Exit.cs" />
+    <Compile Include="Operations\AdditionOperation.cs" />
+    <Compile Include="Operations\SaveNumberOperation.cs" />
+    <Compile Include="InOutStream.cs" />
+    <Compile Include="Operations\DivisionOperation.cs" />
+    <Compile Include="Operations\ExitOperation.cs" />
     <Compile Include="Operations\IOperation.cs" />
-    <Compile Include="Operations\Jmp.cs" />
-    <Compile Include="Operations\Mul.cs" />
+    <Compile Include="Operations\JumpOperation.cs" />
+    <Compile Include="Operations\MultiplicationOperation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Generic.cs" />
     <Compile Include="StreamOut.cs" />
-    <Compile Include="Operations\Sub.cs" />
+    <Compile Include="Operations\SubstractOperation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,12 +1,12 @@
 ﻿namespace Сalculator.Operations
 {
-    public class Div : IOperation
+    public class DivisionOperation : IOperation
     {
         public char OperatorChar => '/';
         public bool Run(params object[] args)
         {
-            var mathBuffer = (Buff)args[0];
-            var outStream = (StreamOut)args[2];
+            var mathBuffer = (ValuesBuffer)args[0];
+            var outStream = (InOutStream)args[1];
 
             double b = mathBuffer.ReadValue();
 
@@ -16,10 +16,9 @@
                 b = mathBuffer.ReadValue();
             }
 
-            double a = mathBuffer.RetTopValue();
+            double a = mathBuffer.ReturnTopValue();
             a = a / b;
-            mathBuffer.SaveValue(a);
-
+            mathBuffer.СheckingValueForInfinity(a);
 
             return true;
         }

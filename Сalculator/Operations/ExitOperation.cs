@@ -1,6 +1,6 @@
 ﻿namespace Сalculator.Operations
 {
-    class Exit : IOperation
+    class ExitOperation : IOperation
     {
         public char OperatorChar => 'q';
         public bool Run(params object[] args)

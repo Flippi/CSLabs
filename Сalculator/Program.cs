@@ -1,11 +1,9 @@
 ﻿namespace Сalculator
 {
-
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-
             new Generic().Start();
         }
     }

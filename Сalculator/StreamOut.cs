@@ -2,9 +2,9 @@
 
 namespace Сalculator
 {
-    public class StreamOut
+    public class StreamOut 
     {
-        public void HelpMassage()
+        public void HelpMessage()
         {
             Console.WriteLine("Usage: \n    " +
                "when first symbol on line is ‘>’ –enter operand (number) \n    " +
@@ -16,7 +16,7 @@ namespace Сalculator
 
         public void OutElement(int ElementNumber, double Element)
         {
-            Console.WriteLine(" [ " + ElementNumber + " ] = " + Element);
+            Console.WriteLine(" [" + ElementNumber + "] = " + Element);
         }
 
         public virtual void SendException() => Console.WriteLine(new DivideByZeroException().Message);

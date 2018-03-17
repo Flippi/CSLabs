@@ -1,14 +1,14 @@
 ﻿using System;
 namespace Сalculator.Operations
 {
-    public class Jmp : IOperation
+    public class JumpOperation : IOperation
     {
         public char OperatorChar => '#';
         public bool Run(params object[] args)
         {
 
-            var mathBuffer = (Buff)args[0];
-            var inStream = (ReadInst)args[1];
+            var mathBuffer = (ValuesBuffer)args[0];
+            var inStream = (InOutStream)args[1];
             
             Console.CursorTop -= 1;
             int number = inStream.ReadInt( mathBuffer.variables.Count );

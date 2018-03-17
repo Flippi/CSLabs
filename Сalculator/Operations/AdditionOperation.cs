@@ -1,17 +1,17 @@
 ﻿
 namespace Сalculator.Operations
 {
-    public class Add : IOperation
+    public class AdditionOperation : IOperation
     {
         public char OperatorChar => '+';
         public bool Run(params object[] args)
         {
-            var mathBuffer = (Buff)args[0];
+            var mathBuffer = (ValuesBuffer)args[0];
 
-            double a = mathBuffer.RetTopValue();
+            double a = mathBuffer.ReturnTopValue();
             double b = mathBuffer.ReadValue();
             a = a + b;
-            mathBuffer.SaveValue(a);
+            mathBuffer.СheckingValueForInfinity(a);
 
             return true;
         }

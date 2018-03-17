@@ -1,50 +1,35 @@
 ﻿using Сalculator.Operations;
 using System.Collections.Generic;
 
-
-
 namespace Сalculator
 {
     public class Generic
     {
+        protected ValuesBuffer Buffer;
 
-        Buff Buff;
-
-        protected IOperation currentOperation = new SaveNumber();
+        protected IOperation currentOperation = new SaveNumberOperation();
 
         protected List<IOperation> operations = new List<IOperation>
         {
-            new Add(),
-            new Sub(),
-            new Mul(),
-            new Div(),
-            new Jmp(),
-            new Exit()
+            new AdditionOperation(),
+            new SubstractOperation(),
+            new MultiplicationOperation(),
+            new DivisionOperation(),
+            new JumpOperation(),
+            new ExitOperation()
         };
 
-        StreamOut outStream = new StreamOut();
-        ReadInst inStream = new ReadInst();
+        InOutStream _InOutStream = new InOutStream();
 
         public void Start()
         {
-            Buff = new Buff();
+            Buffer = new ValuesBuffer();
+            _InOutStream.HelpMessage();
 
-            outStream.HelpMassage();
-
-
-            while (RunOperation())
+            while (currentOperation.Run(Buffer, _InOutStream))
             {
-                ReadOperation();
-            }   
+                currentOperation = _InOutStream.ReadOperation(operations);
+            }
         }
-
-        
-        protected virtual bool RunOperation() => currentOperation.Run(Buff, inStream, outStream);
-
-        protected virtual void ReadOperation() => currentOperation = inStream.ReadOperation(operations);
-
-        
-
-       
     }
 }
