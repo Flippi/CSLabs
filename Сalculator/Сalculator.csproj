@@ -55,7 +55,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Generic.cs" />
-    <Compile Include="StreamOut.cs" />
     <Compile Include="Operations\SubstractOperation.cs" />
   </ItemGroup>
   <ItemGroup>
