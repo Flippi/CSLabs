@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
+using Сalculator.Lab3Server;
 
 namespace Сalculator
 {
@@ -7,13 +10,22 @@ namespace Сalculator
     {
         public int TopValue = 0;
 
-        InOutStream _InOutStream = new InOutStream();
+        public Socket _socket;
+        InOutStream _InOutStream;
+
+        public ValuesBuffer(Socket socket)
+        {
+            _socket = socket;
+            _InOutStream =  new InOutStream(_socket);
+        }
+
+       
 
         public List<double> variables = new List<double> { };
 
         public double ReturnTopValue()
         {
-            double value = variables[TopValue -1 ];
+            double value = variables[TopValue - 1];
             return value;
         }
 
@@ -26,8 +38,14 @@ namespace Сalculator
         public void SaveValue(double value)
         {
             variables.Add(value);
-            
-            Console.WriteLine(" [ " + variables.Count + " ] = " + variables[TopValue]);
+
+            _InOutStream._ServerIO.WriteLine(" [#" + variables.Count + "] = " + variables[TopValue]);
+            TopValue++;
+
+        }
+        public void HideSaveValue(double value)
+        {
+            variables.Add(value);
             TopValue++;
 
         }

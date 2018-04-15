@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lab2\HistoryOperations.cs" />
+    <Compile Include="Lab2\LoadHistory.cs" />
+    <Compile Include="Lab2\SaveHistory.cs" />
+    <Compile Include="Lab3Server\ServerIO.cs" />
     <Compile Include="ValuesBuffer.cs" />
     <Compile Include="ConsoleDelateLine.cs" />
     <Compile Include="Operations\AdditionOperation.cs" />
@@ -60,5 +64,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

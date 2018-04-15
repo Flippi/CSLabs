@@ -1,26 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 using Сalculator.Operations;
+using Сalculator.Lab3Server;
 using System.Globalization;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+
 
 namespace Сalculator
 {
     public class InOutStream
     {
+        public Socket _socket;
+        public ServerIO _ServerIO;
+
+        public InOutStream(Socket socket) {
+            _socket = socket;
+            _ServerIO = new ServerIO(_socket);
+        } 
+
+
         public virtual IOperation ReadOperation(List<IOperation> list)
         {
             IOperation result = null;
-            char key;
-
-            Console.Write("@: ");
+            char key='w';
 
             do
             {
-                key = Console.ReadKey(true).KeyChar;
+                _ServerIO.Write("@: ");
+              
+                try
+                {
+                    key = Convert.ToChar(_ServerIO.ReadString());
+                }
+                catch(Exception ex)
+                {
+                    _ServerIO.WriteLine("Некорректный ввод.");
+                }
             }
             while ((result = list.Find(x => x.OperatorChar == key)) == null);
 
-            Console.WriteLine(result.OperatorChar);
             return result;
         }
 
@@ -29,37 +49,36 @@ namespace Сalculator
             while (true)
 
             {
-                Console.Write(" > ");
+                _ServerIO.Write(" > ");
                 try
                 {
                     double Operand;
-                    Operand = double.Parse(Console.ReadLine(), NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
+                    Operand = double.Parse(_ServerIO.ReadString(), NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
                     return Operand;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    _ServerIO.WriteLine(ex.Message);
                 }
             }
         }
 
         public int ReadInt(int a)
         {
-            
+
 
             int operand = 0;
             while (operand < 1 || operand >= a)
             {
                 try
                 {
-                    Console.WriteLine("@: #");
-                    ConsoleDeleteLine.CleanPreviousLine(4);
-                    operand = int.Parse(Console.ReadLine(), NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
-
+                    _ServerIO.Write("Input number:");
+                    operand = int.Parse(_ServerIO.ReadString(), NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
+                    if (operand < 1 || operand >= a) { _ServerIO.WriteLine("Некорректный ввод.");  }
                 }
                 catch
                 {
-                    ConsoleDeleteLine.CleanPreviousLine(4);
+                    _ServerIO.WriteLine("Некорректный ввод.");
                 }
             }
 
@@ -68,7 +87,7 @@ namespace Сalculator
 
         public void HelpMessage()
         {
-            Console.WriteLine("Usage: \n    " +
+            _ServerIO.WriteLine("Usage: \n    " +
                "when first symbol on line is ‘>’ –enter operand (number) \n    " +
                "when first symbol on line is ‘@’ –enter operation \n    " +
                "operation is one of ‘+’, ‘-‘, ‘/’, ‘*’or \n    " +
@@ -78,9 +97,9 @@ namespace Сalculator
 
         public void OutElement(int ElementNumber, double Element)
         {
-            Console.WriteLine(" [" + ElementNumber + "] = " + Element);
+            _ServerIO.WriteLine(" [" + ElementNumber + "] = " + Element);
         }
 
-        public virtual void SendException() => Console.WriteLine(new DivideByZeroException().Message);
+        public virtual void SendException() => _ServerIO.WriteLine(new DivideByZeroException().Message);
     }
 }
